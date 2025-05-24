@@ -130,6 +130,7 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Toggle menu"
+                style={{ zIndex: 60 }}
               >
                 {mobileMenuOpen ? (
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,30 +157,27 @@ export default function Home() {
                     onClick={() => setMobileMenuOpen(false)}
                   />
                   <motion.div 
-                    className="md:hidden fixed top-20 right-0 bottom-0 left-0 z-40 bg-white dark:bg-gray-900 overflow-y-auto"
+                    className="mobile-menu-container md:hidden fixed top-16 left-0 right-0 z-50 bg-gradient-to-br from-[#1a1033]/90 to-[#1a1a2e]/90 backdrop-blur-xl border-b-2 border-purple-500/60 shadow-2xl rounded-b-2xl py-6 px-2"
                     initial={{ x: '100%' }}
                     animate={{ x: 0 }}
                     exit={{ x: '100%' }}
                     transition={{ type: 'tween', duration: 0.25, ease: 'easeInOut' }}
                   >
-                    <div className="container mx-auto px-6 py-6">
-                      <nav className="flex flex-col space-y-2">
-                        {navItems.map((item) => (
-                          <button
-                            key={item.id}
-                            onClick={() => handleSectionClick(item.id)}
-                            className={`px-4 py-3 text-left text-base font-medium rounded-lg transition-colors ${
-                              activeSection === item.id
-                                ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300'
-                                : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
-                            }`}
-                          >
-                            {item.label}
-                          </button>
-                        ))}
-
-                      </nav>
-                    </div>
+                    <nav className="flex flex-col w-full space-y-3 px-2">
+                      {navItems.map((item) => (
+                        <button
+                          key={item.id}
+                          onClick={() => handleSectionClick(item.id)}
+                          className={`px-4 py-3 text-left text-lg font-semibold rounded-xl transition-all w-full shadow-sm border border-transparent bg-white/5 dark:bg-white/5 hover:bg-purple-900/20 hover:border-purple-500/40 hover:shadow-lg hover-glow
+                            ${activeSection === item.id
+                              ? 'text-gradient glow border-purple-500/80 bg-purple-900/30'
+                              : 'text-gray-200 dark:text-gray-100'}
+                          `}
+                        >
+                          {item.label}
+                        </button>
+                      ))}
+                    </nav>
                   </motion.div>
                 </>
               )}
