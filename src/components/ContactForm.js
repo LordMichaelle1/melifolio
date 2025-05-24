@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -60,8 +61,17 @@ export default function ContactForm() {
     setIsSubmitting(true);
     
     try {
-      // Replace with your form submission logic
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await emailjs.send(
+        'service_xne54br',
+        'template_tqs0xai',
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          // Optionally add time: new Date().toLocaleString(),
+        },
+        'hH-Fw1hr9THEnRv3s'
+      );
       
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });

@@ -7,7 +7,6 @@ import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiExternalLink } from 'react-i
 import { FaReact, FaNodeJs, FaPython } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiTypescript } from 'react-icons/si';
 import dynamic from 'next/dynamic';
-import ThemeToggle from '@/components/ThemeToggle';
 
 // Dynamically import components with no SSR
 const ContactForm = dynamic(() => import('@/components/ContactForm'), { ssr: false });
@@ -18,6 +17,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [expandedProject, setExpandedProject] = useState(null);
 
   // Set mounted state to prevent SSR issues
   useEffect(() => {
@@ -125,7 +125,6 @@ export default function Home() {
             </div>
             
             <div className="flex items-center space-x-4">
-              <ThemeToggle />
               <motion.button 
                 className="md:hidden text-gray-400 hover:text-gray-200"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -278,13 +277,13 @@ export default function Home() {
                 <a href="https://github.com/LordMichaelle1" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   <FiGithub className="w-6 h-6" />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <a href="https://linkedin.com/in/michael-abiodun-2657a3238" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
                   <FiLinkedin className="w-6 h-6" />
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <a href="https://x.com/MeliRe898777" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
                   <FiTwitter className="w-6 h-6" />
                 </a>
-                <a href="mailto:your.email@example.com" className="text-gray-400 hover:text-red-400 transition-colors">
+                <a href="mailto:michaeabiodun2006@gmail.com" className="text-gray-400 hover:text-red-400 transition-colors">
                   <FiMail className="w-6 h-6" />
                 </a>
               </motion.div>
@@ -359,35 +358,45 @@ export default function Home() {
               </motion.div>
               
               <motion.div 
-                className="space-y-6"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                <div className="p-6 bg-card/50 backdrop-blur-sm border border-border rounded-xl">
-                  <h3 className="text-xl font-semibold mb-3 text-gradient">Education</h3>
-                  <div className="space-y-2">
-                    <div>
-                      <h4 className="font-medium text-foreground">B.Sc. Computer Science</h4>
-                      <p className="text-sm text-muted-foreground">Federal University of Technology, Akure • 2018 - 2023</p>
+                  className="space-y-6"
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  {/* Education */}
+                  <div className="p-6 bg-card/50 backdrop-blur-sm border border-border rounded-xl">
+                    <h3 className="text-xl font-semibold mb-3 text-gradient">Education</h3>
+                    <div className="space-y-2">
+                      <div>
+                        <h4 className="font-medium text-foreground">B.Sc. Software Engineering (In Progress)</h4>
+                        <p className="text-sm text-muted-foreground">Federal University of Technology, Akure • 2023 – 2027</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="p-6 bg-card/50 backdrop-blur-sm border border-border rounded-xl">
-                  <h3 className="text-xl font-semibold mb-3 text-gradient">Experience</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-medium text-foreground">Full Stack Developer</h4>
-                      <p className="text-sm text-muted-foreground">Freelance • 2021 - Present</p>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-foreground">Frontend Developer</h4>
-                      <p className="text-sm text-muted-foreground">Tech Solutions Inc. • 2020 - 2021</p>
+
+                  {/* Experience */}
+                  <div className="p-6 bg-card/50 backdrop-blur-sm border border-border rounded-xl">
+                    <h3 className="text-xl font-semibold mb-3 text-gradient">Experience</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-medium text-foreground">Freelance Web Developer</h4>
+                        <p className="text-sm text-muted-foreground">Remote • 2022 – Present</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Built and maintained several personal and community web projects using React, Tailwind CSS, and Laravel.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-foreground">Project Developer</h4>
+                        <p className="text-sm text-muted-foreground">Personal Projects • 2021 – Present</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Developed full-stack applications and tools, focusing on clean UI, performance, and real-world problem solving.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+          
             </div>
           </div>
         </section>
@@ -423,21 +432,20 @@ export default function Home() {
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { name: 'React', level: 90 },
-                    { name: 'Next.js', level: 85 },
-                    { name: 'JavaScript', level: 90 },
-                    { name: 'TypeScript', level: 80 },
-                    { name: 'Tailwind CSS', level: 90 },
-                    { name: 'HTML5 & CSS3', level: 95 },
+                    { name: 'HTML/CSS', level: 90 },
+                    { name: 'JavaScript', level: 85 },
+                    { name: 'React', level: 70 },
+                    { name: 'Next.js', level: 75 },
+                    { name: 'Tailwind CSS', level: 80 },
                   ].map((skill, i) => (
                     <div key={i} className="group">
                       <div className="flex justify-between mb-1">
                         <span className="text-foreground/90 group-hover:text-foreground transition-colors">{skill.name}</span>
                         <span className="text-sm text-muted-foreground">{skill.level}%</span>
                       </div>
-                      <div className="w-full bg-foreground/10 rounded-full h-2">
+                      <div className="w-full bg-gray-200/60 dark:bg-gray-700/60 rounded-full h-2 border border-gray-300 dark:border-gray-800">
                         <motion.div 
-                          className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
+                          className="h-full bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
@@ -462,21 +470,20 @@ export default function Home() {
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { name: 'Node.js', level: 85 },
-                    { name: 'Express', level: 85 },
-                    { name: 'RESTful APIs', level: 90 },
-                    { name: 'GraphQL', level: 80 },
-                    { name: 'MongoDB', level: 80 },
-                    { name: 'PostgreSQL', level: 75 },
+                    { name: 'PHP', level: 90 },
+                    { name: 'Laravel', level: 85 },
+                    { name: 'Python', level: 50 },
+                    { name: 'Java', level: 70 },
+                    { name: 'MySQL', level: 85 },
                   ].map((skill, i) => (
                     <div key={i} className="group">
                       <div className="flex justify-between mb-1">
                         <span className="text-foreground/90 group-hover:text-foreground transition-colors">{skill.name}</span>
                         <span className="text-sm text-muted-foreground">{skill.level}%</span>
                       </div>
-                      <div className="w-full bg-foreground/10 rounded-full h-2">
+                      <div className="w-full bg-gray-200/60 dark:bg-gray-700/60 rounded-full h-2 border border-gray-300 dark:border-gray-800">
                         <motion.div 
-                          className="h-full bg-gradient-to-r from-secondary to-accent rounded-full"
+                          className="h-full bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
@@ -501,21 +508,17 @@ export default function Home() {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {[
-                    { name: 'Git & GitHub', level: 90 },
-                    { name: 'Docker', level: 80 },
-                    { name: 'AWS', level: 75 },
-                    { name: 'Figma', level: 85 },
-                    { name: 'Agile/Scrum', level: 85 },
-                    { name: 'CI/CD', level: 80 },
+                    { name: 'Git', level: 80 },
+                    { name: 'After Effects', level: 75 },
                   ].map((skill, i) => (
                     <div key={i} className="group">
                       <div className="flex justify-between mb-1">
                         <span className="text-foreground/90 group-hover:text-foreground transition-colors">{skill.name}</span>
                         <span className="text-sm text-muted-foreground">{skill.level}%</span>
                       </div>
-                      <div className="w-full bg-foreground/10 rounded-full h-2">
+                      <div className="w-full bg-gray-200/60 dark:bg-gray-700/60 rounded-full h-2 border border-gray-300 dark:border-gray-800">
                         <motion.div 
-                          className="h-full bg-gradient-to-r from-accent to-primary rounded-full"
+                          className="h-full bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
@@ -550,28 +553,28 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  title: 'E-commerce Platform',
-                  description: 'A full-stack e-commerce solution with payment integration and admin dashboard.',
-                  tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-                  image: '/project1.jpg',
-                  github: '#',
-                  demo: '#',
+                  title: 'Personal Portfolio Website',
+                  description: 'A modern, animated portfolio to showcase my skills, built with Next.js and Tailwind CSS.',
+                  tags: ['Next.js', 'React', 'Tailwind CSS'],
+                  image: '/melifolio.png',
+                  github: 'https://github.com/yourusername/melifolio',
+                  demo: 'https://melifolio.vercel.app',
                 },
                 {
-                  title: 'Task Management App',
-                  description: 'A collaborative task management application with real-time updates and team features.',
-                  tags: ['Next.js', 'Firebase', 'Tailwind CSS'],
-                  image: '/project2.jpg',
-                  github: '#',
-                  demo: '#',
+                  title: 'Student Portal for Polytechnic',
+                  description: 'A full-featured student portal for a polytechnic, including authentication, course management, and results tracking. Built with PHP, Laravel, MySQL, and modern frontend tools. Demo login: Username: ND12345 | Password: password',
+                  tags: ['Laravel', 'PHP', 'MySQL', 'HTML/CSS', 'JavaScript'],
+                  image: '/portal.png',
+                  github: '',
+                  demo: 'https://portal.bestpotech.edu.ng',
                 },
                 {
-                  title: 'Portfolio Website',
-                  description: 'A modern, responsive portfolio website built with Next.js and Framer Motion.',
-                  tags: ['Next.js', 'Framer Motion', 'Tailwind CSS'],
-                  image: '/project3.jpg',
-                  github: '#',
-                  demo: '#',
+                  title: 'E-commerce Site for Solar Company',
+                  description: 'An in-progress ecommerce platform for a solar company, featuring product listings, shopping cart, and secure checkout. Built with React, Next.js, and Tailwind CSS.',
+                  tags: ['React', 'laravel', 'Tailwind CSS', 'E-commerce'],
+                  image: '/solar.png',
+                  github: '',
+                  demo: 'https://e-solar-nbzb.vercel.app',
                 },
               ].map((project, index) => (
                 <motion.div
@@ -583,7 +586,8 @@ export default function Home() {
                       src={project.image || '/project-placeholder.jpg'} 
                       alt={project.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain shadow-md transition-transform duration-500 group-hover:scale-105"
+                      style={{ objectFit: 'contain' }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                       <div>
@@ -600,7 +604,13 @@ export default function Home() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg font-semibold text-foreground mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
+                    <p className={`text-muted-foreground mb-4 ${expandedProject === index ? '' : 'line-clamp-2'}`}>{project.description}</p>
+                    <button
+                      className="text-xs text-primary underline focus:outline-none mb-2"
+                      onClick={() => setExpandedProject(expandedProject === index ? null : index)}
+                    >
+                      {expandedProject === index ? 'Show less' : 'Show more'}
+                    </button>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags?.map((tag, i) => (
                         <span key={i} className="px-2 py-1 text-xs rounded-full bg-foreground/10 text-foreground/80">
@@ -694,7 +704,7 @@ export default function Home() {
                 <FiGithub className="w-5 h-5" />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://linkedin.com/in/michael-abiodun-2657a3238" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-muted-foreground hover:text-blue-400 transition-colors"
@@ -703,7 +713,7 @@ export default function Home() {
                 <FiLinkedin className="w-5 h-5" />
               </a>
               <a 
-                href="https://twitter.com" 
+                href="https://x.com/MeliRe898777" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-muted-foreground hover:text-blue-400 transition-colors"
@@ -712,7 +722,7 @@ export default function Home() {
                 <FiTwitter className="w-5 h-5" />
               </a>
               <a 
-                href="mailto:contact@michaelabiodun.com" 
+                href="mailto:michaelabiodun2006@gmail.com" 
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="Send email"
               >

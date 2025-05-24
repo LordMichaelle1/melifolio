@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { FiAward, FiCode, FiUsers, FiCoffee } from 'react-icons/fi';
 
 const stats = [
-  { id: 1, name: 'Years Experience', value: '5+', icon: <FiAward className="w-6 h-6" /> },
-  { id: 2, name: 'Projects Completed', value: '50+', icon: <FiCode className="w-6 h-6" /> },
+  { id: 1, name: 'Years Experience', value: '4+', icon: <FiAward className="w-6 h-6" /> },
+  { id: 2, name: 'Projects Completed', value: '37+', icon: <FiCode className="w-6 h-6" /> },
   { id: 3, name: 'Happy Clients', value: '30+', icon: <FiUsers className="w-6 h-6" /> },
   { id: 4, name: 'Cups of Coffee', value: '∞', icon: <FiCoffee className="w-6 h-6" /> },
 ];
