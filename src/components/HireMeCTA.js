@@ -14,14 +14,14 @@ export default function HireMeCTA() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Let's Work Together</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient glow">Let's Work Together</h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
             I'm currently available for freelance work. If you're looking for a developer who can bring your ideas to life, let's chat!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
               href="#contact"
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+              className="btn-primary px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >

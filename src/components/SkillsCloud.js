@@ -46,7 +46,7 @@ const SkillCircle = ({ skills, radius, startAngle = 0, colorClass }) => {
         return (
           <motion.div
             key={`${skill.name}-${index}`}
-            className={`absolute text-sm font-medium px-3 py-1.5 rounded-full whitespace-nowrap ${colorClass}`}
+            className={`absolute text-sm font-medium px-3 py-1.5 tag-neon whitespace-nowrap ${colorClass}`}
             style={{
               left: '50%',
               top: '50%',
@@ -89,7 +89,7 @@ export default function SkillsCloud() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          <span className="text-lg font-bold text-gradient glow">
             My Skills
           </span>
         </motion.div>

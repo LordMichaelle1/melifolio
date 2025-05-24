@@ -1,28 +1,32 @@
 import './globals.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { Inter } from 'next/font/google';
+import { ThemeProvider } from '@/components/theme-provider';
+import ThemeToggle from '@/components/ThemeToggle';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Nightcrawler Portfolio',
-  description: 'A sleek, dark-themed portfolio with smooth animations',
+  description: 'A sleek, cyberpunk portfolio with neon purple and blue accents.',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="font-sans" suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200">
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-[#1a1033] text-white min-h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
-          {children}
+          <div className="relative min-h-screen">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1a1033] via-[#1a1a2e] to-[#1a1033] opacity-95" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(139,92,246,0.18),transparent_70%)]" />
+            <div className="relative z-10">
+              {children}
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -7,6 +7,7 @@ import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiExternalLink } from 'react-i
 import { FaReact, FaNodeJs, FaPython } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiTypescript } from 'react-icons/si';
 import dynamic from 'next/dynamic';
+import ThemeToggle from '@/components/ThemeToggle';
 
 // Dynamically import components with no SSR
 const ContactForm = dynamic(() => import('@/components/ContactForm'), { ssr: false });
@@ -97,9 +98,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Michael
-              </span>
+              <span className="text-xl font-bold text-gradient glow opacity-80">M3li.Re</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -126,6 +125,7 @@ export default function Home() {
             </div>
             
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <motion.button 
                 className="md:hidden text-gray-400 hover:text-gray-200"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -226,7 +226,7 @@ export default function Home() {
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-xl blur opacity-75 group-hover:opacity-100 transition-all duration-300 group-hover:duration-200"></div>
             <div className="relative px-6 py-8 md:px-12 md:py-16 glass rounded-xl">
               <motion.h1 
-                className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
+                className="text-4xl md:text-6xl font-bold mb-6 text-gradient glow"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -318,8 +318,8 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient glow">About Me</h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-400 mx-auto rounded-full mb-2"></div>
             </motion.div>
             
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -344,13 +344,13 @@ export default function Home() {
                         My journey into tech started back in high school, when I first stumbled across HTML and CSS. What began as curiosity quickly became a full-on passion.
                       </p>
                       <p className="text-muted-foreground mb-4">
-                        Today, I’m studying Software Engineering at <span className="text-primary font-medium">FUTA</span>, and I spend most of my time building full-stack applications that are both functional and thoughtfully designed.
+                        Today, I'm studying Software Engineering at <span className="text-primary font-medium">FUTA</span>, and I spend most of my time building full-stack applications that are both functional and thoughtfully designed.
                       </p>
                       <p className="text-muted-foreground mb-4">
                         I work primarily with <span className="text-primary font-medium">React, Next.js, and Node.js</span>, and I enjoy creating clean, accessible, and efficient digital experiences from front to back.
                       </p>
                       <p className="text-muted-foreground">
-                        Outside of code, I’m also into <span className="text-accent font-medium">video editing</span> — crafting short-form content, promos, and storytelling projects that blend visuals with sound. That creative side helps shape the way I think about user experience and design.
+                        Outside of code, I'm also into <span className="text-accent font-medium">video editing</span> — crafting short-form content, promos, and storytelling projects that blend visuals with sound. That creative side helps shape the way I think about user experience and design.
                       </p>
                     </div>
 
@@ -366,7 +366,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 <div className="p-6 bg-card/50 backdrop-blur-sm border border-border rounded-xl">
-                  <h3 className="text-xl font-semibold mb-3 text-primary">Education</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-gradient">Education</h3>
                   <div className="space-y-2">
                     <div>
                       <h4 className="font-medium text-foreground">B.Sc. Computer Science</h4>
@@ -375,7 +375,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="p-6 bg-card/50 backdrop-blur-sm border border-border rounded-xl">
-                  <h3 className="text-xl font-semibold mb-3 text-secondary">Experience</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-gradient">Experience</h3>
                   <div className="space-y-4">
                     <div>
                       <h4 className="font-medium text-foreground">Full Stack Developer</h4>
@@ -402,8 +402,8 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">My Skills</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-2"></div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient glow">My Skills</h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-400 mx-auto rounded-full mb-2"></div>
               <p className="max-w-2xl mx-auto text-muted-foreground">
                 Here are the technologies and tools I work with, organized by category.
               </p>
@@ -418,7 +418,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <h3 className="text-xl font-semibold mb-4 text-primary flex items-center">
+                <h3 className="text-xl font-semibold mb-4 text-gradient">
                   <FaReact className="mr-2 text-primary" /> Frontend
                 </h3>
                 <div className="space-y-3">
@@ -457,7 +457,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <h3 className="text-xl font-semibold mb-4 text-secondary flex items-center">
+                <h3 className="text-xl font-semibold mb-4 text-gradient">
                   <FaNodeJs className="mr-2 text-secondary" /> Backend & Database
                 </h3>
                 <div className="space-y-3">
@@ -496,7 +496,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <h3 className="text-xl font-semibold mb-4 text-accent flex items-center">
+                <h3 className="text-xl font-semibold mb-4 text-gradient">
                   <FiGithub className="mr-2 text-accent" /> Tools & Other
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -540,8 +540,8 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient glow">My Projects</h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-400 mx-auto rounded-full mb-2"></div>
               <p className="max-w-2xl mx-auto mt-6 text-gray-400">
                 Here are some of my recent projects. Each one was built to solve a specific problem or explore new technologies.
               </p>
@@ -589,7 +589,7 @@ export default function Home() {
                       <div>
                         <div className="flex flex-wrap gap-2 mb-2">
                           {project.tags?.map((tag, i) => (
-                            <span key={i} className="px-2 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary-foreground">
+                            <span key={i} className="px-2 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary-foreground tag-neon">
                               {tag}
                             </span>
                           ))}
