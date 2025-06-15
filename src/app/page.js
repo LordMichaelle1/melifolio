@@ -572,7 +572,7 @@ export default function Home() {
                   tags: ['React', 'laravel', 'Tailwind CSS', 'E-commerce'],
                   image: '/solar.png',
                   github: '',
-                  demo: 'https://e-solar-nbzb.vercel.app',
+                  demo: 'https://esolarfront.vercel.app',
                 },
               ].map((project, index) => (
                 <motion.div
