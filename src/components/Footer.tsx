@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/lordmichaelle1', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/michael-abiodun-2657a3238/', label: 'LinkedIn' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/shipwithmeli/', label: 'LinkedIn' },
   { icon: Twitter, href: 'https://x.com/Michael52110896', label: 'Twitter' },
   { icon: Mail, href: 'mailto:Michaelabiodun2006@gmail.com', label: 'Email' },
 ];
