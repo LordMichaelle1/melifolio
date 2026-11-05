@@ -14,9 +14,9 @@ export default function Home() {
       <TechMarquee />
       <About />
       <Stats />
-      <Skills />
       <Projects />
       <Timeline />
+      <Skills />
       <Contact />
     </>
   );

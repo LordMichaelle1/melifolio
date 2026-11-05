@@ -3,7 +3,6 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -15,30 +14,22 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button
-        className="p-2 rounded-lg bg-surface-solid/50 hover:bg-surface-solid transition-colors"
-        aria-label="Toggle theme"
-      >
-        <div className="w-5 h-5" />
+      <button className="p-2" aria-label="Toggle theme">
+        <div className="w-4 h-4" />
       </button>
     );
   }
 
+  const isDark = theme === 'dark';
+  const Icon = isDark ? Sun : Moon;
+
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className={cn(
-        'p-2 rounded-lg transition-all duration-300 btn-press',
-        'bg-surface-solid/50 hover:bg-surface-solid',
-        'hover:glow-accent'
-      )}
-      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="btn-press p-2 text-secondary hover:text-accent transition-colors"
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
-      {theme === 'dark' ? (
-        <Sun className="w-5 h-5 text-cta" />
-      ) : (
-        <Moon className="w-5 h-5 text-accent" />
-      )}
+      <Icon className="w-4 h-4" />
     </button>
   );
 }

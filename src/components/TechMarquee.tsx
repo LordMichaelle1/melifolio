@@ -1,89 +1,55 @@
 'use client';
 
+import { useRef } from 'react';
 import {
-  Code2,
-  Database,
-  Globe,
-  Smartphone,
-  Server,
-  Palette,
-  Terminal,
-  GitBranch,
-} from 'lucide-react';
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from 'framer-motion';
+import { marqueeItems } from '@/data/site';
+import { wrap } from '@/lib/cipher';
 
-const technologies = [
-  { name: 'React', icon: Code2 },
-  { name: 'Next.js', icon: Globe },
-  { name: 'TypeScript', icon: Terminal },
-  { name: 'Node.js', icon: Server },
-  { name: 'Python', icon: Code2 },
-  { name: 'PostgreSQL', icon: Database },
-  { name: 'MongoDB', icon: Database },
-  { name: 'React Native', icon: Smartphone },
-  { name: 'Tailwind CSS', icon: Palette },
-  { name: 'Git', icon: GitBranch },
-  { name: 'Laravel', icon: Code2 },
-  { name: 'Java', icon: Code2 },
-];
+const BASE_SPEED = 1.2;
+const items = [...marqueeItems, ...marqueeItems];
 
+// Drifts on its own, speeds up with scroll velocity and flips direction when scrolling back up.
 export function TechMarquee() {
+  const reduced = useReducedMotion();
+  const offset = useMotionValue(0);
+  const direction = useRef(1);
+  const { scrollY } = useScroll();
+  const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
+  const boost = useTransform(velocity, [0, 1000], [0, 5], { clamp: false });
+  const x = useTransform(offset, (value) => `${wrap(-50, 0, value)}%`);
+
+  useAnimationFrame((_, delta) => {
+    if (reduced) return;
+
+    const speed = boost.get();
+    if (speed < 0) direction.current = -1;
+    else if (speed > 0) direction.current = 1;
+
+    const step = direction.current * -BASE_SPEED * (delta / 1000);
+    offset.set(offset.get() + step + step * Math.abs(speed));
+  });
+
   return (
-    <div className="py-12 overflow-hidden bg-surface-solid/20">
-      <div className="container-custom mb-8">
-        <p className="text-center text-secondary text-sm uppercase tracking-wider">
-          Technologies I Work With
-        </p>
-      </div>
-
-      <div className="relative">
-        {/* Gradient masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-background to-transparent z-10" />
-
-        <div className="marquee-container">
-          <div className="marquee-content">
-            {[...technologies, ...technologies].map((tech, index) => (
-              <div
-                key={`${tech.name}-${index}`}
-                className="flex items-center gap-3 px-6 py-3 glass-card shrink-0 hover:glow-accent transition-shadow duration-300 group"
-              >
-                <tech.icon className="w-5 h-5 text-accent group-hover:text-cta transition-colors" />
-                <span className="text-primary font-medium whitespace-nowrap">
-                  {tech.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <style jsx>{`
-          .marquee-container {
-            overflow: hidden;
-            width: 100%;
-          }
-
-          .marquee-content {
-            display: flex;
-            gap: 1rem;
-            width: max-content;
-            animation: marquee 30s linear infinite;
-            will-change: transform;
-          }
-
-          .marquee-container:hover .marquee-content {
-            animation-play-state: paused;
-          }
-
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            .marquee-content { animation: none; }
-          }
-        `}</style>
-      </div>
+    <div aria-hidden="true" className="relative z-10 overflow-hidden border-y border-line bg-background py-6 md:py-8">
+      <motion.div style={{ x }} className="flex w-max gap-10 md:gap-16">
+        {items.map((item, index) => (
+          <span
+            key={`${item}-${index}`}
+            className="text-hollow text-5xl md:text-7xl font-medium tracking-tighter whitespace-nowrap"
+          >
+            {item}
+          </span>
+        ))}
+      </motion.div>
     </div>
   );
 }

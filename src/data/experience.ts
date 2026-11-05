@@ -68,7 +68,7 @@ export const experiences: Experience[] = [
   },
   {
     id: 'journey-start',
-    role: 'Started Coding Journey',
+    role: 'Started Coding',
     company: 'Self-Taught Developer',
     duration: '2021',
     achievements: [

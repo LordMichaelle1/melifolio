@@ -14,7 +14,7 @@ export const projects: Project[] = [
     id: 'bestpotech',
     title: 'Best Solution Polytechnic Platform',
     description:
-      'Full digital platform for a polytechnic. One Next.js app serves the public site, student portal, staff admin and API, with Payload CMS managing 16 typed data models, per-student data isolation and live Paystack payments reconciled by webhook. The public site ranks first for the school name.',
+      'Platform for a polytechnic. One Next.js app serves the public site, student portal, staff admin and API. Payload CMS manages 16 typed data models, each student only sees their own data, and live Paystack payments are reconciled by webhook. The public site ranks first for the school name.',
     image: '/portal.png',
     tags: ['Next.js', 'TypeScript', 'Payload CMS', 'PostgreSQL', 'Paystack'],
     liveUrl: 'https://bestpotech.edu.ng',
@@ -34,7 +34,7 @@ export const projects: Project[] = [
     id: 'bestsolar',
     title: 'BestSolar Energy',
     description:
-      'E-commerce platform for a solar energy company. Multi-location business with auth, cart, package configurator, customer portal, and a custom AI assistant for solar advice. Live in production.',
+      'E-commerce platform for a solar energy company with several locations. It has auth, a cart, a package configurator, a customer portal and a custom AI assistant that gives solar advice. It is live in production.',
     image: '/solar.png',
     tags: ['Next.js', 'Supabase', 'Stripe', 'AI Agent'],
     liveUrl: 'https://bestsolarr.com',
@@ -43,7 +43,7 @@ export const projects: Project[] = [
   {
     id: 'apigrid',
     title: 'API Grid',
-    description: 'Backend-as-a-Service platform. Production-ready API endpoints for auth, payments, notifications, user management, and 15+ categories. Ship backends in minutes, not months.',
+    description: 'Backend-as-a-service platform with ready-made API endpoints across 15+ categories, including auth, payments, notifications and user management.',
     image: '/apigrid.png',
     tags: ['Next.js', 'Node.js', 'PostgreSQL', 'REST API'],
     liveUrl: 'https://useapigrid.com',

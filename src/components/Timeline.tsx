@@ -1,96 +1,48 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Briefcase, GraduationCap } from 'lucide-react';
+import { motion, useScroll } from 'framer-motion';
 import { experiences } from '@/data/experience';
-import { cn } from '@/lib/utils';
+import { SectionHeading } from './SectionHeading';
 
 export function Timeline() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const listRef = useRef<HTMLOListElement>(null);
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 75%'] });
 
   return (
-    <section id="experience" className="section bg-surface-solid/30">
+    <section id="experience" className="section bg-background">
       <div className="container-custom">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-accent text-sm font-medium uppercase tracking-wider">
-            Experience
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mt-2">
-            My Journey
-          </h2>
-        </motion.div>
+        <SectionHeading index="0x03" label="Experience" title="Where I've Worked" />
 
-        <div className="relative max-w-3xl mx-auto">
-          {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-accent/20 -translate-x-1/2" />
+        <ol ref={listRef} className="relative border-l border-line">
+          <motion.span
+            aria-hidden="true"
+            style={{ scaleY: scrollYProgress }}
+            className="absolute -left-px top-0 bottom-0 w-px origin-top bg-accent"
+          />
 
-          {experiences.map((exp, index) => (
-            <motion.div
+          {experiences.map((exp) => (
+            <motion.li
               key={exp.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className={cn(
-                'relative mb-12 last:mb-0',
-                'pl-12 md:pl-0',
-                index % 2 === 0 ? 'md:pr-[calc(50%+2rem)]' : 'md:pl-[calc(50%+2rem)]'
-              )}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10% 0px' }}
+              transition={{ duration: 0.6 }}
+              className="grid md:grid-cols-12 gap-3 md:gap-6 border-b border-line last:border-b-0 py-8 pl-5 md:pl-8"
             >
-              {/* Timeline dot */}
-              <div
-                className={cn(
-                  'absolute top-0 w-8 h-8 rounded-full',
-                  'bg-accent flex items-center justify-center',
-                  'left-0 md:left-1/2 md:-translate-x-1/2',
-                  'shadow-lg shadow-accent/25'
-                )}
-              >
-                {exp.type === 'work' ? (
-                  <Briefcase className="w-4 h-4 text-white" />
-                ) : (
-                  <GraduationCap className="w-4 h-4 text-white" />
-                )}
+              <p className="md:col-span-3 label text-accent">{exp.duration}</p>
+              <div className="md:col-span-4">
+                <h3 className="text-xl md:text-2xl font-medium tracking-tight text-primary">{exp.role}</h3>
+                <p className="text-secondary text-sm mt-1">{exp.company}</p>
               </div>
-
-              <div
-                className={cn(
-                  'glass-card p-6',
-                  'hover:glow-accent transition-all duration-300'
-                )}
-              >
-                <span className="text-cta text-sm font-medium">
-                  {exp.duration}
-                </span>
-                <h3 className="text-lg font-semibold text-primary mt-1">
-                  {exp.role}
-                </h3>
-                <p className="text-accent text-sm mb-4">
-                  {exp.company}
-                </p>
-                <ul className="space-y-2">
-                  {exp.achievements.map((achievement, i) => (
-                    <li
-                      key={i}
-                      className="text-secondary text-sm flex items-start gap-2"
-                    >
-                      <span className="text-cta mt-1.5">•</span>
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+              <ul className="md:col-span-5 space-y-2 text-secondary text-sm leading-relaxed">
+                {exp.achievements.map((achievement) => (
+                  <li key={achievement}>{achievement}</li>
+                ))}
+              </ul>
+            </motion.li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
