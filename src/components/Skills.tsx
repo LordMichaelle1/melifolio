@@ -38,7 +38,7 @@ export function Skills() {
           ))}
         </div>
 
-        <motion.ul layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px border border-line bg-line">
+        <motion.ul layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-line">
           <AnimatePresence mode="popLayout" initial={false}>
             {filteredSkills.map((skill) => (
               <motion.li
@@ -48,7 +48,7 @@ export function Skills() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
-                className="wipe bg-background px-4 py-5 text-primary text-sm md:text-base tracking-tight cursor-default"
+                className="wipe border-r border-b border-line px-4 py-5 text-primary text-sm md:text-base cursor-default"
               >
                 <DecodeText text={skill.name} trigger="hover" duration={400} />
               </motion.li>

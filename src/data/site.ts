@@ -20,19 +20,6 @@ export const socialLinks = [
 
 export const specialties = ['Next.js', 'Python', 'Rust', 'APIs', 'AI Evaluation'];
 
-export const marqueeItems = [
-  'React',
-  'Next.js',
-  'TypeScript',
-  'Node.js',
-  'Python',
-  'Django',
-  'Rust',
-  'PostgreSQL',
-  'Laravel',
-  'Tailwind CSS',
-];
-
 export interface FocusArea {
   icon: LucideIcon;
   title: string;

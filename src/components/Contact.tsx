@@ -15,7 +15,7 @@ export function Contact() {
 
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5 space-y-8">
-            <p className="text-lg md:text-2xl leading-snug tracking-tight text-secondary">
+            <p className="text-lg md:text-2xl leading-snug text-secondary">
               Email me about a project or a role, or use the form.
             </p>
 

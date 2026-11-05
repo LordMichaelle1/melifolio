@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DecodeText } from './DecodeText';
+import { Redact } from './Redact';
 
 interface SectionHeadingProps {
   index: string;
@@ -24,8 +24,8 @@ export function SectionHeading({ index, label, title }: SectionHeadingProps) {
           className="h-px flex-1 origin-left bg-line"
         />
       </div>
-      <h2 className="text-4xl sm:text-6xl lg:text-8xl font-medium tracking-tighter text-primary">
-        <DecodeText text={title} duration={900} />
+      <h2 className="display text-3xl sm:text-5xl lg:text-7xl font-semibold leading-none text-primary">
+        <Redact wrap>{title}</Redact>
       </h2>
     </div>
   );

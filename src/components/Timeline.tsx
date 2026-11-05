@@ -32,7 +32,7 @@ export function Timeline() {
             >
               <p className="md:col-span-3 label text-accent">{exp.duration}</p>
               <div className="md:col-span-4">
-                <h3 className="text-xl md:text-2xl font-medium tracking-tight text-primary">{exp.role}</h3>
+                <h3 className="text-xl md:text-2xl font-semibold text-primary">{exp.role}</h3>
                 <p className="text-secondary text-sm mt-1">{exp.company}</p>
               </div>
               <ul className="md:col-span-5 space-y-2 text-secondary text-sm leading-relaxed">

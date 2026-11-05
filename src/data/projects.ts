@@ -21,16 +21,6 @@ export const projects: Project[] = [
     size: 'large',
   },
   {
-    id: 'shipwithmeli',
-    title: 'shipwithmeli',
-    description:
-      'Productized service for non-technical founders. Take a vibecoded AI MVP from 70% to launched and live in 4 weeks. Fixed price, fixed scope, daily updates. The code is yours from day one.',
-    image: '/shipwithmeli.png',
-    tags: ['Next.js', 'TypeScript', 'React', 'AI'],
-    liveUrl: 'https://shipwithmeli.com',
-    size: 'large',
-  },
-  {
     id: 'bestsolar',
     title: 'BestSolar Energy',
     description:
@@ -47,6 +37,15 @@ export const projects: Project[] = [
     image: '/apigrid.png',
     tags: ['Next.js', 'Node.js', 'PostgreSQL', 'REST API'],
     liveUrl: 'https://useapigrid.com',
+    size: 'medium',
+  },
+  {
+    id: 'shipwithmeli',
+    title: 'shipwithmeli',
+    description:
+      'A fixed-price service I ran in 2026, taking non-technical founders\' AI-built MVPs from 70% to launched in four weeks. I built the site myself, and the service is now closed.',
+    image: '/shipwithmeli.png',
+    tags: ['Next.js', 'TypeScript', 'React', 'AI'],
     size: 'medium',
   },
 ];

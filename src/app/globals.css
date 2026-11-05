@@ -13,7 +13,8 @@
   --accent-ink: #0A0A0B;
 }
 
-.light {
+/* The declassified sheet: every token inside it resolves to paper and ink */
+.paper {
   --background: #EDEAE3;
   --surface: #E5E1D8;
   --surface-solid: #DAD6CC;
@@ -22,6 +23,14 @@
   --line: #C9C5BA;
   --accent: #C9340B;
   --accent-ink: #FFFFFF;
+  background: var(--background);
+  color: var(--primary);
+}
+
+/* Expanded display cut of Archivo */
+.display {
+  font-stretch: 125%;
+  letter-spacing: -0.035em;
 }
 
 html {
@@ -155,12 +164,6 @@ body::after {
   to {
     visibility: hidden;
   }
-}
-
-/* Hollow display text for the marquee */
-.text-hollow {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--secondary);
 }
 
 /* Project screenshots stay desaturated until pointed at */

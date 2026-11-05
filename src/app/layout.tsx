@@ -1,12 +1,12 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Geist, Martian_Mono } from 'next/font/google';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { Archivo, Martian_Mono } from 'next/font/google';
+import { MotionProvider } from '@/components/MotionProvider';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ScrollProgress } from '@/components/ScrollProgress';
 
-const sans = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const sans = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-sans' });
 const mono = Martian_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 const description = 'Software engineer building production web apps and backends, and writing benchmark tasks that test AI coding models.';
@@ -29,14 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={`${sans.variable} ${mono.variable} font-sans bg-background text-primary min-h-screen antialiased`}>
-        <ThemeProvider>
+        <MotionProvider>
           <ScrollProgress />
           <Navbar />
           <main className="relative z-10">{children}</main>
           <Footer />
-        </ThemeProvider>
+        </MotionProvider>
       </body>
     </html>
   );

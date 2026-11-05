@@ -7,7 +7,6 @@ import { navLinks } from '@/data/site';
 import { cn } from '@/lib/utils';
 import { CipherLink } from './CipherLink';
 import { DecodeText } from './DecodeText';
-import { ThemeToggle } from './ThemeToggle';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,10 +49,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
-          <CipherLink href="/cv.pdf" download label="Download CV" icon={<Download className="w-3.5 h-3.5" />} className="py-2.5" />
-        </div>
+        <CipherLink href="/cv.pdf" download label="Download CV" icon={<Download className="w-3.5 h-3.5" />} className="hidden md:inline-flex py-2.5" />
 
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -89,14 +85,13 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-3xl font-medium tracking-tighter text-primary py-2"
+                    className="display text-2xl font-semibold text-primary py-2"
                   >
                     {link.label}
                   </a>
                 ))}
-                <div className="flex items-center justify-between pt-4 mt-4 border-t border-line">
-                  <ThemeToggle />
-                  <CipherLink href="/cv.pdf" download label="Download CV" icon={<Download className="w-3.5 h-3.5" />} className="py-2.5" />
+                <div className="pt-4 mt-4 border-t border-line">
+                  <CipherLink href="/cv.pdf" download label="Download CV" icon={<Download className="w-3.5 h-3.5" />} className="w-full py-2.5" />
                 </div>
               </div>
             </motion.div>

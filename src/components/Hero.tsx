@@ -9,24 +9,25 @@ import { CipherLink } from './CipherLink';
 import { DecodeCycle } from './DecodeCycle';
 import { DecodeText } from './DecodeText';
 
-const nameClasses = 'block text-[min(22vw,38svh)] font-semibold uppercase leading-[0.84] tracking-[-0.05em]';
+const SCROLL_RANGE = 900;
+const nameClasses = 'display block text-[min(16vw,34svh)] font-bold uppercase leading-[0.88]';
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useCipherField(canvasRef);
 
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
-  const firstLineX = useTransform(scrollYProgress, [0, 1], ['0%', '-14%']);
-  const secondLineX = useTransform(scrollYProgress, [0, 1], ['0%', '14%']);
-  const detailsOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // The hero is pinned, so these follow page scroll instead of the hero's own position.
+  const { scrollY } = useScroll();
+  const firstLineX = useTransform(scrollY, [0, SCROLL_RANGE], ['0%', '-14%']);
+  const secondLineX = useTransform(scrollY, [0, SCROLL_RANGE], ['0%', '14%']);
+  const detailsOpacity = useTransform(scrollY, [0, SCROLL_RANGE / 2], [1, 0]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden pt-28 pb-10">
+    <section className="[@media(min-height:640px)]:sticky top-0 min-h-[100svh] flex flex-col justify-end overflow-hidden pt-24 pb-10">
       <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 h-full w-full font-mono" />
 
       <div className="container-custom relative w-full pointer-events-none">
-        <p className="label text-accent mb-6">Software Engineer</p>
+        <p className="label text-accent mb-6">Open to remote full-stack roles</p>
 
         <h1 className="text-primary mb-10 md:mb-14">
           <motion.span style={{ x: firstLineX }} className={nameClasses}>
@@ -41,7 +42,7 @@ export function Hero() {
           style={{ opacity: detailsOpacity }}
           className="grid gap-8 lg:grid-cols-12 lg:items-end pointer-events-auto"
         >
-          <p className="lg:col-span-5 text-lg md:text-xl text-primary leading-snug tracking-tight">
+          <p className="lg:col-span-5 text-lg md:text-xl text-primary leading-snug">
             I build production web apps and backends. I also write benchmark tasks that test AI coding models.
           </p>
 

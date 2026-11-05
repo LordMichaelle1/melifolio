@@ -12,7 +12,7 @@ export function About() {
         <SectionHeading index="0x01" label="About Me" title="What I Work On" />
 
         <div className="grid lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-7 space-y-6 text-lg md:text-2xl leading-snug tracking-tight text-secondary">
+          <div className="lg:col-span-7 space-y-6 text-lg md:text-2xl leading-snug text-secondary">
             <p>
               I&apos;m a full-stack engineer, and most of my work is software already in production. The largest
               piece is a platform for a polytechnic: <Redact>one Next.js app</Redact> runs the public site, student

@@ -13,8 +13,6 @@ function readColors() {
   return {
     base: styles.getPropertyValue('--primary').trim(),
     signal: styles.getPropertyValue('--accent').trim(),
-    // Dark glyphs read much louder on paper than light glyphs do on black.
-    dim: document.documentElement.classList.contains('light') ? 0.55 : 1,
   };
 }
 
@@ -48,7 +46,7 @@ export function useCipherField(canvasRef: RefObject<HTMLCanvasElement | null>) {
 
           if (Math.random() < 0.004 + wave * 0.05) cells[index] = randomGlyph();
 
-          ctx.globalAlpha = (0.07 + wave * 0.16) * colors.dim + near * 0.9;
+          ctx.globalAlpha = 0.07 + wave * 0.16 + near * 0.9;
           ctx.fillStyle = near > 0.15 ? colors.signal : colors.base;
           ctx.fillText(near > 0.3 ? SECRET[(col + row) % SECRET.length] : cells[index], x, y);
         }
@@ -56,7 +54,10 @@ export function useCipherField(canvasRef: RefObject<HTMLCanvasElement | null>) {
     };
 
     const loop = (now: number) => {
-      if (now - lastDraw >= FRAME_MS) {
+      // Pinned behind the paper sheet the canvas still counts as on screen, so skip drawing once covered.
+      const isCovered = window.scrollY > canvas.clientHeight;
+
+      if (!isCovered && now - lastDraw >= FRAME_MS) {
         if (drawCount++ % 30 === 0) colors = readColors();
         draw(now);
         lastDraw = now;

@@ -2,16 +2,18 @@
 
 import { motion } from 'framer-motion';
 import { type ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 interface RedactProps {
   children: ReactNode;
   delay?: number;
+  wrap?: boolean;
 }
 
 // A redaction bar that wipes away once the text scrolls into view.
-export function Redact({ children, delay = 0 }: RedactProps) {
+export function Redact({ children, delay = 0, wrap = false }: RedactProps) {
   return (
-    <span className="relative inline-block whitespace-nowrap text-primary">
+    <span className={cn('relative inline-block text-primary', !wrap && 'whitespace-nowrap')}>
       {children}
       <motion.span
         aria-hidden="true"

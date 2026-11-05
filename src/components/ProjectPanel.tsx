@@ -47,8 +47,8 @@ export function ProjectPanel({ project, index, total, progress }: ProjectPanelPr
         <div className="lg:col-span-5 lg:order-1 flex flex-col justify-between gap-8 p-6 md:p-8 lg:border-r border-line">
           <div>
             <p className="label text-accent mb-4">{number} / {String(total).padStart(2, '0')}</p>
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tighter leading-none text-primary mb-5">
-              <DecodeText text={project.title} duration={700} />
+            <h3 className="display text-2xl md:text-4xl font-semibold leading-none text-primary mb-5">
+              {project.title}
             </h3>
             <p className="text-secondary leading-relaxed">{project.description}</p>
           </div>

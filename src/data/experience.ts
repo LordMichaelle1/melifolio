@@ -63,6 +63,7 @@ export const experiences: Experience[] = [
     achievements: [
       'Delivered web apps and REST APIs for clients in Laravel, Node.js, Next.js and PostgreSQL',
       'Handled auth, role-based access, admin workflows and third-party integrations',
+      'Built bill payments and a top-up ledger with webhook reconciliation for a fintech',
     ],
     type: 'work',
   },

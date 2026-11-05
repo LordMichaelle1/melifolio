@@ -17,8 +17,3 @@ export function scramble(text: string, progress: number) {
 export function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
-
-export function wrap(min: number, max: number, value: number) {
-  const range = max - min;
-  return ((((value - min) % range) + range) % range) + min;
-}
