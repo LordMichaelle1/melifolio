@@ -13,7 +13,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { icon: Briefcase, value: 4, suffix: '+', label: 'Years Coding' },
+  { icon: Briefcase, value: 5, suffix: '+', label: 'Years Coding' },
   { icon: Code2, value: 20, suffix: '+', label: 'Projects Built' },
   { icon: Users, value: 10, suffix: '+', label: 'Happy Clients' },
   { icon: Bug, value: 500, suffix: '+', label: 'Bugs Squashed' },

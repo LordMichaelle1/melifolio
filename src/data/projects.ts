@@ -11,6 +11,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'bestpotech',
+    title: 'Best Solution Polytechnic Platform',
+    description:
+      'Full digital platform for a polytechnic. One Next.js app serves the public site, student portal, staff admin and API, with Payload CMS managing 16 typed data models, per-student data isolation and live Paystack payments reconciled by webhook. The public site ranks first for the school name.',
+    image: '/portal.png',
+    tags: ['Next.js', 'TypeScript', 'Payload CMS', 'PostgreSQL', 'Paystack'],
+    liveUrl: 'https://bestpotech.edu.ng',
+    size: 'large',
+  },
+  {
     id: 'shipwithmeli',
     title: 'shipwithmeli',
     description:
@@ -21,19 +31,10 @@ export const projects: Project[] = [
     size: 'large',
   },
   {
-    id: 'nexipaas',
-    title: 'NexiPaaS',
-    description: 'Enterprise integration platform competing with Celigo. Connect apps, automate workflows, and transform data in real-time with AI-powered tools. Built for scale.',
-    image: '/nexipaas.png',
-    tags: ['React', 'Node.js', 'TypeScript', 'PostgreSQL', 'AI'],
-    liveUrl: 'https://nexipaas.com/landing-v2',
-    size: 'large',
-  },
-  {
     id: 'bestsolar',
     title: 'BestSolar Energy',
     description:
-      'E-commerce platform for a Nigerian solar company. Multi-location business with auth, cart, package configurator, customer portal, and a custom AI assistant for solar advice. Live in production.',
+      'E-commerce platform for a solar energy company. Multi-location business with auth, cart, package configurator, customer portal, and a custom AI assistant for solar advice. Live in production.',
     image: '/solar.png',
     tags: ['Next.js', 'Supabase', 'Stripe', 'AI Agent'],
     liveUrl: 'https://bestsolarr.com',
