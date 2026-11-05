@@ -1,142 +1,103 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download } from 'lucide-react';
-import { ThemeToggle } from './ThemeToggle';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Download, Menu, X } from 'lucide-react';
+import { navLinks } from '@/data/site';
 import { cn } from '@/lib/utils';
-
-const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#contact', label: 'Contact' },
-];
+import { CipherLink } from './CipherLink';
+import { DecodeText } from './DecodeText';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const MenuIcon = isOpen ? X : Menu;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('keydown', handleKey);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKey);
+    };
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsOpen(false);
-  };
-
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4 }}
+    <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'glass py-3' : 'py-5'
+        'fixed top-0 inset-x-0 z-50 border-b transition-colors duration-300',
+        scrolled || isOpen ? 'bg-background border-line' : 'border-transparent'
       )}
     >
-      <div className="container-custom flex items-center justify-between">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          className="text-xl font-bold text-primary hover:text-accent transition-colors"
-        >
-          Meli<span className="text-accent">.Dev</span>
+      <div className="container-custom flex items-center justify-between py-4">
+        <a href="#" className="font-mono text-sm text-primary">
+          <DecodeText text="Meli.Dev" trigger="hover" duration={400} />
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="nav-link text-secondary hover:text-primary transition-colors text-sm font-medium"
-            >
-              {link.label}
-            </a>
+            <li key={link.href}>
+              <a href={link.href} className="label text-secondary hover:text-primary transition-colors">
+                <DecodeText text={link.label} trigger="hover" duration={350} />
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        <div className="hidden md:flex items-center gap-4">
-          <ThemeToggle />
-          <a
-            href="/cv.pdf"
-            download
-            className={cn(
-              'flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm',
-              'bg-accent hover:bg-accent-light text-white',
-              'transition-all duration-300 btn-press hover:glow-accent'
-            )}
-          >
-            <Download className="w-4 h-4" />
-            <span>Download CV</span>
-          </a>
-        </div>
+        <CipherLink href="/cv.pdf" download label="Download CV" icon={<Download className="w-3.5 h-3.5" />} className="hidden md:inline-flex py-2.5" />
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-primary"
+          className="md:hidden p-2 -mr-2 text-primary"
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <MenuIcon className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden glass mt-2 mx-4 rounded-xl overflow-hidden"
-          >
-            <div className="flex flex-col p-4 gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-secondary hover:text-primary transition-colors py-2 text-center"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="flex items-center justify-center gap-4 pt-4 border-t border-white/10">
-                <ThemeToggle />
-                <a
-                  href="/cv.pdf"
-                  download
-                  className={cn(
-                    'flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm',
-                    'bg-accent hover:bg-accent-light text-white',
-                    'transition-all duration-300 btn-press'
-                  )}
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download CV</span>
-                </a>
+          <>
+            <motion.button
+              aria-label="Close menu"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.7 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsOpen(false)}
+              className="md:hidden fixed inset-0 top-[57px] -z-10 bg-background cursor-default"
+            />
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: 'auto', transition: { duration: 0.26, ease: [0.2, 0, 0, 1] } }}
+              exit={{ height: 0, transition: { duration: 0.2 } }}
+              className="md:hidden overflow-hidden border-t border-line bg-background"
+            >
+              <div className="container-custom flex flex-col py-4">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="display text-2xl font-semibold text-primary py-2"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <div className="pt-4 mt-4 border-t border-line">
+                  <CipherLink href="/cv.pdf" download label="Download CV" icon={<Download className="w-3.5 h-3.5" />} className="w-full py-2.5" />
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

@@ -1,143 +1,60 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowDown, Mail, Github } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Typewriter } from './Typewriter';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowDownRight, Mail } from 'lucide-react';
+import { specialties } from '@/data/site';
+import { useCipherField } from '@/hooks/useCipherField';
+import { CipherLink } from './CipherLink';
+import { DecodeCycle } from './DecodeCycle';
+import { DecodeText } from './DecodeText';
 
+const SCROLL_RANGE = 900;
 export function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useCipherField(canvasRef);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
-
-  const scrollToContact = () => {
-    const element = document.querySelector('#contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToProjects = () => {
-    const element = document.querySelector('#projects');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  // The hero is pinned, so these follow page scroll instead of the hero's own position.
+  const { scrollY } = useScroll();
+  const firstLineX = useTransform(scrollY, [0, SCROLL_RANGE], ['0%', '-14%']);
+  const secondLineX = useTransform(scrollY, [0, SCROLL_RANGE], ['0%', '14%']);
+  const detailsOpacity = useTransform(scrollY, [0, SCROLL_RANGE / 2], [1, 0]);
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-mesh-gradient">
-      <div className="absolute inset-0 bg-background/80" />
+    <section className="[@media(min-height:640px)]:sticky top-0 min-h-[100svh] flex flex-col justify-end overflow-hidden pt-24 pb-10">
+      <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 h-full w-full font-mono" />
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="container-custom relative z-10 text-center py-20"
-      >
-        <motion.span
-          variants={itemVariants}
-          className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6"
-        >
-          Software Engineer
-        </motion.span>
+      <div className="container-custom relative w-full pointer-events-none">
+        <p className="label text-accent mb-6">Open to remote full-stack roles</p>
 
-        <motion.h1
-          variants={itemVariants}
-          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-primary mb-4 sm:mb-6 leading-tight"
-        >
-          Hi, I&apos;m{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-cta">
-            Abiodun Michael
-          </span>
-        </motion.h1>
-
-        <motion.p
-          variants={itemVariants}
-          className="text-base sm:text-lg md:text-xl text-secondary max-w-2xl mx-auto mb-4 px-4"
-        >
-          I build exceptional digital experiences with clean code,
-          modern technologies, and a passion for performance.
-        </motion.p>
+        <h1 className="text-primary mb-10 md:mb-14">
+          <motion.span style={{ x: firstLineX }} className="hero-name">
+            <DecodeText text="Abiodun" duration={1100} />
+          </motion.span>
+          <motion.span style={{ x: secondLineX }} className="hero-name">
+            <DecodeText text="Michael" duration={1100} delay={200} />
+          </motion.span>
+        </h1>
 
         <motion.div
-          variants={itemVariants}
-          className="text-lg sm:text-xl md:text-2xl font-medium mb-8 sm:mb-10"
+          style={{ opacity: detailsOpacity }}
+          className="grid gap-8 lg:grid-cols-12 lg:items-end pointer-events-auto"
         >
-          <span className="text-secondary">I specialize in </span>
-          <Typewriter
-            words={['React & Next.js', 'Full Stack Development', 'Mobile Apps', 'Cloud Solutions', 'API Design']}
-            className="text-cta"
-          />
+          <p className="lg:col-span-5 text-lg md:text-xl text-primary leading-snug">
+            I build production web apps and backends. I also write benchmark tasks that test AI coding models.
+          </p>
+
+          <div className="lg:col-span-3">
+            <p className="label text-secondary mb-2">I specialize in</p>
+            <DecodeCycle words={specialties} className="font-mono text-sm md:text-base text-primary" />
+          </div>
+
+          <div className="lg:col-span-4 flex flex-col sm:flex-row gap-3 lg:justify-end">
+            <CipherLink href="#contact" label="Get In Touch" variant="solid" icon={<Mail className="w-4 h-4" />} />
+            <CipherLink href="#projects" label="View Projects" icon={<ArrowDownRight className="w-4 h-4" />} />
+          </div>
         </motion.div>
-
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <button
-            onClick={scrollToContact}
-            className={cn(
-              'flex items-center gap-2 px-8 py-4 rounded-xl font-semibold',
-              'bg-gradient-to-r from-accent to-accent-light text-white',
-              'transition-all duration-300 btn-press hover:glow-accent',
-              'hover:shadow-lg hover:shadow-accent/25'
-            )}
-          >
-            <Mail className="w-5 h-5" />
-            <span>Get In Touch</span>
-          </button>
-
-          <button
-            onClick={scrollToProjects}
-            className={cn(
-              'flex items-center gap-2 px-8 py-4 rounded-xl font-semibold',
-              'glass-card hover:bg-surface-solid/80',
-              'text-primary transition-all duration-300 btn-press'
-            )}
-          >
-            <Github className="w-5 h-5" />
-            <span>View Projects</span>
-          </button>
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.button
-          onClick={() => {
-            const element = document.querySelector('#about');
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="p-2 text-secondary hover:text-primary transition-colors"
-          aria-label="Scroll to about section"
-        >
-          <ArrowDown className="w-6 h-6" />
-        </motion.button>
-      </motion.div>
+      </div>
     </section>
   );
 }

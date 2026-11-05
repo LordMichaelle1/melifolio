@@ -3,79 +3,104 @@
 @import 'tailwindcss/utilities';
 
 :root {
-  --background: #0B1120;
-  --surface: rgba(30, 41, 59, 0.5);
-  --surface-solid: #1E293B;
-  --primary: #F8FAFC;
-  --secondary: #94A3B8;
-  --accent: #6366F1;
-  --accent-light: #818CF8;
-  --cta: #2DD4BF;
-  --cta-light: #5EEAD4;
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --background: #0A0A0B;
+  --surface: #111113;
+  --surface-solid: #18181B;
+  --primary: #ECEAE4;
+  --secondary: #8E8C85;
+  --line: #26262A;
+  --accent: #FF4F1F;
+  --accent-ink: #0A0A0B;
 }
 
-.light {
-  --background: #F8FAFC;
-  --surface: rgba(226, 232, 240, 0.6);
-  --surface-solid: #E2E8F0;
-  --primary: #0F172A;
-  --secondary: #475569;
-  --accent: #4F46E5;
-  --accent-light: #6366F1;
-  --cta: #14B8A6;
-  --cta-light: #2DD4BF;
-  --glass-border: rgba(0, 0, 0, 0.1);
+/* The declassified sheet: every token inside it resolves to paper and ink */
+.paper {
+  --background: #EDEAE3;
+  --surface: #E5E1D8;
+  --surface-solid: #DAD6CC;
+  --primary: #111113;
+  --secondary: #5C5A54;
+  --line: #C9C5BA;
+  --accent: #C9340B;
+  --accent-ink: #FFFFFF;
+  background: var(--background);
+  color: var(--primary);
+  /* The stamp starts oversized. Clip keeps it from widening the page without breaking sticky. */
+  overflow-x: clip;
 }
 
-/* Smooth scrolling */
+/* Expanded display cut of Archivo */
+.display {
+  font-stretch: 125%;
+  letter-spacing: -0.035em;
+}
+
+/* The hero name goes condensed on phones: same width as expanded, far taller letters */
+.hero-name {
+  display: block;
+  font-size: min(25vw, 30svh);
+  font-stretch: 75%;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .hero-name {
+    font-size: min(16vw, 34svh);
+    font-stretch: 125%;
+    letter-spacing: -0.035em;
+    line-height: 0.88;
+  }
+}
+
 html {
+  position: relative;
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
-/* Glassmorphism utility - optimized for performance */
-.glass {
-  background: var(--surface);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
-  transform: translateZ(0);
+body {
+  overflow-x: clip;
 }
 
-.glass-card {
-  background: var(--surface);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
-  border-radius: 1rem;
-  transform: translateZ(0);
+/* Film grain over the whole page */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Glow effect for skill cards */
-.glow-accent {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
-.glow-cta {
-  box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface-solid);
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 4px;
+  background: var(--line);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--cta);
+  background: var(--accent);
 }
 
 /* Reduced motion support */
@@ -90,41 +115,112 @@ html {
   }
 }
 
-/* Button press effect */
+/* Small monospaced annotation text */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Accent fill that wipes across on hover and focus */
+.wipe {
+  position: relative;
+  isolation: isolate;
+  transition: color 0.25s ease-out;
+}
+
+.wipe::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.wipe:focus-visible {
+  color: var(--accent-ink);
+}
+
+.wipe:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.wipe[data-active='true'],
+.wipe[data-active='true'] * {
+  color: var(--accent-ink);
+}
+
+.wipe[data-active='true']::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (hover: hover) {
+  .wipe:hover,
+  .wipe:hover * {
+    color: var(--accent-ink);
+  }
+
+  .wipe:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
 .btn-press {
-  transition: transform 0.1s ease-out;
+  transition: transform 0.1s ease-out, color 0.25s ease-out;
 }
 
 .btn-press:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
-/* Nav link underline animation */
-.nav-link {
-  position: relative;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
+/* Blinking block caret */
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.2em;
+  vertical-align: -0.12em;
   background: var(--accent);
-  transition: width 0.3s ease-out;
+  animation: caret 1s steps(2, start) infinite;
 }
 
-.nav-link:hover::after {
-  width: 100%;
+@keyframes caret {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Project screenshots stay desaturated until pointed at */
+.project-image {
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 0.5s ease-out, transform 0.8s cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (hover: hover) {
+  .group:hover .project-image {
+    filter: grayscale(0) contrast(1);
+    transform: scale(1.03);
+  }
+}
+
+[data-active='true'] .project-image {
+  filter: none;
 }
 
 /* Section spacing */
 .section {
-  @apply py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-8;
+  @apply py-20 md:py-32;
 }
 
 /* Container */
 .container-custom {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10;
 }

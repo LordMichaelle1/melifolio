@@ -1,6 +1,7 @@
 export interface Project {
   id: string;
   title: string;
+  summary: string;
   description: string;
   image: string;
   tags: string[];
@@ -11,29 +12,22 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'shipwithmeli',
-    title: 'shipwithmeli',
+    id: 'bestpotech',
+    title: 'Best Solution Polytechnic Platform',
+    summary: 'Public site, student portal, staff admin and API in one Next.js app, with live payments.',
     description:
-      'Productized service for non-technical founders. Take a vibecoded AI MVP from 70% to launched and live in 4 weeks. Fixed price, fixed scope, daily updates. The code is yours from day one.',
-    image: '/shipwithmeli.png',
-    tags: ['Next.js', 'TypeScript', 'React', 'AI'],
-    liveUrl: 'https://shipwithmeli.com',
-    size: 'large',
-  },
-  {
-    id: 'nexipaas',
-    title: 'NexiPaaS',
-    description: 'Enterprise integration platform competing with Celigo. Connect apps, automate workflows, and transform data in real-time with AI-powered tools. Built for scale.',
-    image: '/nexipaas.png',
-    tags: ['React', 'Node.js', 'TypeScript', 'PostgreSQL', 'AI'],
-    liveUrl: 'https://nexipaas.com/landing-v2',
+      'Platform for a polytechnic. One Next.js app serves the public site, student portal, staff admin and API. Payload CMS manages 16 typed data models, each student only sees their own data, and live Paystack payments are reconciled by webhook. The public site ranks first for the school name.',
+    image: '/portal.png',
+    tags: ['Next.js', 'TypeScript', 'Payload CMS', 'PostgreSQL', 'Paystack'],
+    liveUrl: 'https://bestpotech.edu.ng',
     size: 'large',
   },
   {
     id: 'bestsolar',
     title: 'BestSolar Energy',
+    summary: 'E-commerce for a solar company, with a customer portal and an AI assistant.',
     description:
-      'E-commerce platform for a Nigerian solar company. Multi-location business with auth, cart, package configurator, customer portal, and a custom AI assistant for solar advice. Live in production.',
+      'E-commerce platform for a solar energy company with several locations. It has auth, a cart, a package configurator, a customer portal and a custom AI assistant that gives solar advice. It is live in production.',
     image: '/solar.png',
     tags: ['Next.js', 'Supabase', 'Stripe', 'AI Agent'],
     liveUrl: 'https://bestsolarr.com',
@@ -42,10 +36,21 @@ export const projects: Project[] = [
   {
     id: 'apigrid',
     title: 'API Grid',
-    description: 'Backend-as-a-Service platform. Production-ready API endpoints for auth, payments, notifications, user management, and 15+ categories. Ship backends in minutes, not months.',
+    summary: 'Ready-made backend APIs across 15+ categories.',
+    description:'Backend-as-a-service platform with ready-made API endpoints across 15+ categories, including auth, payments, notifications and user management.',
     image: '/apigrid.png',
     tags: ['Next.js', 'Node.js', 'PostgreSQL', 'REST API'],
     liveUrl: 'https://useapigrid.com',
+    size: 'medium',
+  },
+  {
+    id: 'shipwithmeli',
+    title: 'shipwithmeli',
+    summary: 'A fixed-price launch service I ran in 2026, now closed.',
+    description:
+      'A fixed-price service I ran in 2026, taking non-technical founders\' AI-built MVPs from 70% to launched in four weeks. I built the site myself, and the service is now closed.',
+    image: '/shipwithmeli.png',
+    tags: ['Next.js', 'TypeScript', 'React', 'AI'],
     size: 'medium',
   },
 ];
