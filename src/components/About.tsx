@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { focusAreas } from '@/data/site';
+import { FocusRow } from './FocusRow';
 import { Redact } from './Redact';
 import { SectionHeading } from './SectionHeading';
 
@@ -34,20 +34,7 @@ export function About() {
 
           <ul className="lg:col-span-5 border-t border-line self-start">
             {focusAreas.map((area, index) => (
-              <motion.li
-                key={area.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-10% 0px' }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="wipe border-b border-line p-5 flex items-start gap-4 cursor-default"
-              >
-                <area.icon className="w-5 h-5 mt-0.5 shrink-0 text-accent" />
-                <div>
-                  <h3 className="text-primary font-medium mb-1">{area.title}</h3>
-                  <p className="text-secondary text-sm">{area.description}</p>
-                </div>
-              </motion.li>
+              <FocusRow key={area.title} area={area} index={index} />
             ))}
           </ul>
         </div>

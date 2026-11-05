@@ -25,12 +25,34 @@
   --accent-ink: #FFFFFF;
   background: var(--background);
   color: var(--primary);
+  /* The stamp starts oversized. Clip keeps it from widening the page without breaking sticky. */
+  overflow-x: clip;
 }
 
 /* Expanded display cut of Archivo */
 .display {
   font-stretch: 125%;
   letter-spacing: -0.035em;
+}
+
+/* The hero name goes condensed on phones: same width as expanded, far taller letters */
+.hero-name {
+  display: block;
+  font-size: min(25vw, 30svh);
+  font-stretch: 75%;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .hero-name {
+    font-size: min(16vw, 34svh);
+    font-stretch: 125%;
+    letter-spacing: -0.035em;
+    line-height: 0.88;
+  }
 }
 
 html {
@@ -129,6 +151,16 @@ body::after {
   transform-origin: left;
 }
 
+.wipe[data-active='true'],
+.wipe[data-active='true'] * {
+  color: var(--accent-ink);
+}
+
+.wipe[data-active='true']::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 @media (hover: hover) {
   .wipe:hover,
   .wipe:hover * {
@@ -179,10 +211,8 @@ body::after {
   }
 }
 
-@media (hover: none) {
-  .project-image {
-    filter: none;
-  }
+[data-active='true'] .project-image {
+  filter: none;
 }
 
 /* Section spacing */

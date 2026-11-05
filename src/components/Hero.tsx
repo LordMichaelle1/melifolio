@@ -10,8 +10,6 @@ import { DecodeCycle } from './DecodeCycle';
 import { DecodeText } from './DecodeText';
 
 const SCROLL_RANGE = 900;
-const nameClasses = 'display block text-[min(16vw,34svh)] font-bold uppercase leading-[0.88]';
-
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useCipherField(canvasRef);
@@ -30,10 +28,10 @@ export function Hero() {
         <p className="label text-accent mb-6">Open to remote full-stack roles</p>
 
         <h1 className="text-primary mb-10 md:mb-14">
-          <motion.span style={{ x: firstLineX }} className={nameClasses}>
+          <motion.span style={{ x: firstLineX }} className="hero-name">
             <DecodeText text="Abiodun" duration={1100} />
           </motion.span>
-          <motion.span style={{ x: secondLineX }} className={nameClasses}>
+          <motion.span style={{ x: secondLineX }} className="hero-name">
             <DecodeText text="Michael" duration={1100} delay={200} />
           </motion.span>
         </h1>

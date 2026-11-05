@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { categories, skills } from '@/data/skills';
 import { cn } from '@/lib/utils';
-import { DecodeText } from './DecodeText';
 import { SectionHeading } from './SectionHeading';
+import { SkillCell } from './SkillCell';
 
 export function Skills() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -41,17 +41,7 @@ export function Skills() {
         <motion.ul layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-line">
           <AnimatePresence mode="popLayout" initial={false}>
             {filteredSkills.map((skill) => (
-              <motion.li
-                key={skill.name}
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="wipe border-r border-b border-line px-4 py-5 text-primary text-sm md:text-base cursor-default"
-              >
-                <DecodeText text={skill.name} trigger="hover" duration={400} />
-              </motion.li>
+              <SkillCell key={skill.name} name={skill.name} />
             ))}
           </AnimatePresence>
         </motion.ul>

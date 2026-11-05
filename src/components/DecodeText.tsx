@@ -10,11 +10,12 @@ interface DecodeTextProps {
   trigger?: 'view' | 'hover';
   delay?: number;
   duration?: number;
+  active?: boolean;
   className?: string;
 }
 
 // While decoding, the real text stays in place invisibly to hold the layout, so nothing shifts.
-export function DecodeText({ text, trigger = 'view', delay, duration, className }: DecodeTextProps) {
+export function DecodeText({ text, trigger = 'view', delay, duration, active, className }: DecodeTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-5% 0px' });
   const { display, play } = useDecode(text, { delay, duration });
@@ -22,6 +23,10 @@ export function DecodeText({ text, trigger = 'view', delay, duration, className 
   useEffect(() => {
     if (trigger === 'view' && isInView) play();
   }, [trigger, isInView, play]);
+
+  useEffect(() => {
+    if (active) play();
+  }, [active, play]);
 
   useEffect(() => {
     if (trigger !== 'hover') return;
