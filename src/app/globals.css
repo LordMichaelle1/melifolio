@@ -47,8 +47,9 @@
 }
 
 @media (min-width: 768px) {
+  /* 15rem caps it at the 1500px container, or wide monitors push the name past the edge */
   .hero-name {
-    font-size: min(16vw, 34svh);
+    font-size: min(16vw, 34svh, 15rem);
     font-stretch: 125%;
     letter-spacing: -0.035em;
     line-height: 0.88;
